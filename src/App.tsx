@@ -45,7 +45,9 @@ function App() {
   };
 
   const calculateConsuption = (speed: number) => {
-    return (selectedConsuption * Math.pow(slope, distance) * speed) / 100;
+    const consuption =
+      (selectedConsuption * Math.pow(slope, distance) * speed) / 100;
+    return Math.round(consuption * 10) / 10;
   };
 
   const calculateDurationDifference = (speed1: number, speed2: number) => {
@@ -70,7 +72,7 @@ function App() {
       (selectedConsuption * Math.pow(slope, distance) * speed1) / 100 -
         (selectedConsuption * Math.pow(slope, distance) * speed2) / 100
     );
-    return difference;
+    return Math.round(difference * 10) / 10;
   };
 
   return (
