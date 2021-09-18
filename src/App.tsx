@@ -36,14 +36,16 @@ function App() {
   };
 
   const calculateDurationDifference = (speed1: number, speed2: number) => {
-    return distance / speed2 - distance / speed1;
+    const difference = Math.abs(distance / speed2 - distance / speed1);
+    return difference;
   };
 
   const calculateConsuptionDifference = (speed1: number, speed2: number) => {
-    return (
+    const difference = Math.abs(
       (selectedConsuption * Math.pow(slope, distance) * speed1) / 100 -
-      (selectedConsuption * Math.pow(slope, distance) * speed2) / 100
+        (selectedConsuption * Math.pow(slope, distance) * speed2) / 100
     );
+    return difference;
   };
 
   return (
@@ -94,33 +96,19 @@ function App() {
             Matka toisella nopeudella kestää {calculateDuration(speedB)}h ja
             kulutus on {calculateConsuption(speedB)}.
           </p>
-          {speedA < speedB ? (
-            <div>
-              <p>
-                Ensimmäinen nopeus on{" "}
-                {calculateDurationDifference(speedB, speedA)}h hitaampi kuin
-                toinen nopeus.
-              </p>
-              <p>
-                Ensimmäinen nopeus kuluttaa{" "}
-                {calculateConsuptionDifference(speedB, speedA)} vähemmän bensaa
-                kuin toinen nopeus.
-              </p>
-            </div>
-          ) : (
-            <div>
-              <p>
-                Ensimmäinen nopeus on{" "}
-                {calculateDurationDifference(speedA, speedB)}h nopeampi kuin
-                toinen nopeus.
-              </p>
-              <p>
-                Ensimmäinen nopeus kuluttaa{" "}
-                {calculateConsuptionDifference(speedA, speedB)} enemmän bensaa
-                kuin toinen nopeus.
-              </p>
-            </div>
-          )}
+          <div>
+            <p>
+              Ensimmäinen nopeus on{" "}
+              {calculateDurationDifference(speedA, speedB)}h{" "}
+              {speedA < speedB ? "hitaampi" : "nopeampi"} kuin toinen nopeus.
+            </p>
+            <p>
+              Ensimmäinen nopeus kuluttaa{" "}
+              {calculateConsuptionDifference(speedA, speedB)}{" "}
+              {speedA < speedB ? "vähemmän" : "enemmän"} bensaa kuin toinen
+              nopeus.
+            </p>
+          </div>
         </div>
       ) : null}
     </div>
