@@ -20,11 +20,14 @@ function App() {
     },
   ];
   const slope = 1.009;
+  const minimum = 1;
+  const maxDistance = 5000;
+  const maxSpeed = 250;
 
   const [selectedConsuption, setSelectedConsuption] = useState(0);
-  const [distance, setDistance] = useState(0);
-  const [speedA, setSpeedA] = useState(0);
-  const [speedB, setSpeedB] = useState(0);
+  const [distance, setDistance] = useState(minimum);
+  const [speedA, setSpeedA] = useState(minimum);
+  const [speedB, setSpeedB] = useState(minimum);
   const [calculete, setCalculate] = useState(false);
 
   const calculateDuration = (speed: number) => {
@@ -98,18 +101,24 @@ function App() {
         type="number"
         value={distance}
         onChange={(e) => setDistance(Number(e.target.value))}
+        min={minimum}
+        max={maxDistance}
       />
       <p>Anna ensimmäinen ajettava nopeus</p>
       <input
         type="number"
         value={speedA}
         onChange={(e) => setSpeedA(Number(e.target.value))}
+        min={minimum}
+        max={maxSpeed}
       />
       <p>Anna toinen ajettava nopeus</p>
       <input
         type="number"
         value={speedB}
         onChange={(e) => setSpeedB(Number(e.target.value))}
+        min={minimum}
+        max={maxSpeed}
       />
       <br />
       <button onClick={() => setCalculate(true)}>calculate</button>
