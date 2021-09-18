@@ -28,7 +28,20 @@ function App() {
   const [calculete, setCalculate] = useState(false);
 
   const calculateDuration = (speed: number) => {
-    return distance / speed;
+    const duration = distance / speed;
+    const helperDate = new Date(0, 0);
+    helperDate.setSeconds(+duration * 60 * 60);
+    if (duration < 1) {
+      return `${helperDate.toLocaleTimeString([], {
+        minute: "2-digit",
+      })}min`;
+    } else {
+      return `${helperDate.toLocaleTimeString([], {
+        hour: "numeric",
+      })}h ${helperDate.toLocaleTimeString([], {
+        minute: "2-digit",
+      })}min`;
+    }
   };
 
   const calculateConsuption = (speed: number) => {
@@ -37,7 +50,19 @@ function App() {
 
   const calculateDurationDifference = (speed1: number, speed2: number) => {
     const difference = Math.abs(distance / speed2 - distance / speed1);
-    return difference;
+    const helperDate = new Date(0, 0);
+    helperDate.setSeconds(+difference * 60 * 60);
+    if (difference < 1) {
+      return `${helperDate.toLocaleTimeString([], {
+        minute: "2-digit",
+      })}min`;
+    } else {
+      return `${helperDate.toLocaleTimeString([], {
+        hour: "numeric",
+      })}h ${helperDate.toLocaleTimeString([], {
+        minute: "2-digit",
+      })}min`;
+    }
   };
 
   const calculateConsuptionDifference = (speed1: number, speed2: number) => {
@@ -89,22 +114,22 @@ function App() {
       {calculete ? (
         <div>
           <p>
-            Matka ensimmäisellä nopeudella kestää {calculateDuration(speedA)}h
-            ja kulutus on {calculateConsuption(speedA)}.
+            Matka ensimmäisellä nopeudella kestää {calculateDuration(speedA)} ja
+            kulutus on {calculateConsuption(speedA)}l.
           </p>
           <p>
-            Matka toisella nopeudella kestää {calculateDuration(speedB)}h ja
-            kulutus on {calculateConsuption(speedB)}.
+            Matka toisella nopeudella kestää {calculateDuration(speedB)} ja
+            kulutus on {calculateConsuption(speedB)}l.
           </p>
           <div>
             <p>
               Ensimmäinen nopeus on{" "}
-              {calculateDurationDifference(speedA, speedB)}h{" "}
+              {calculateDurationDifference(speedA, speedB)}{" "}
               {speedA < speedB ? "hitaampi" : "nopeampi"} kuin toinen nopeus.
             </p>
             <p>
               Ensimmäinen nopeus kuluttaa{" "}
-              {calculateConsuptionDifference(speedA, speedB)}{" "}
+              {calculateConsuptionDifference(speedA, speedB)}l{" "}
               {speedA < speedB ? "vähemmän" : "enemmän"} bensaa kuin toinen
               nopeus.
             </p>
