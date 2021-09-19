@@ -61,6 +61,11 @@ function App() {
     },
   ];
 
+  const carEmoji =
+    (cars &&
+      cars.find((car) => car.consumption === selectedConsuption)?.emoji) ||
+    "🚓";
+
   return (
     <Layout className="layout">
       <Content className="content">
@@ -99,7 +104,7 @@ function App() {
         <Divider />
         {calculete && (
           <div>
-            {drawCars(speedA, speedB)}
+            {drawCars(speedA, speedB, carEmoji)}
             <Space direction="vertical">
               {speedValues.map((speed, index) => {
                 return (

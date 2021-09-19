@@ -26,6 +26,11 @@ body,
   width: 100%;
   display: flex;
   justify-content: space-between;
+  background-color: #ddd;
+}
+
+.carContainerFirst {
+  margin-bottom: 10px;
 }
 
 .car1,
@@ -49,4 +54,11 @@ body,
 
 .complete {
   width: 0%;
+}
+
+.track {
+  background: limegreen;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 24px;
 }
