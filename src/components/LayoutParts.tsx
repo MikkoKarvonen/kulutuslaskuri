@@ -113,8 +113,8 @@ const renderSpeedSummary = (
   return (
     <Text>
       Matka {route} nopeudella kestää{" "}
-      <Text strong>{Calculators.calculateDuration(distance, speed)}</Text>
-      ja kulutus on{" "}
+      <Text strong>{Calculators.calculateDuration(distance, speed)}</Text> ja
+      kulutus on{" "}
       <Text strong>
         {Calculators.calculateConsuption(
           selectedConsuption,

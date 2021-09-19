@@ -1,17 +1,14 @@
 const calculateDuration = (distance: number, speed: number) => {
   const duration = distance / speed;
-  const helperDate = new Date(0, 0);
-  helperDate.setSeconds(+duration * 60 * 60);
+  let toTime = duration * 60 * 60;
+  const hours = Math.floor(toTime / (60 * 60));
+  toTime = toTime - hours * 60 * 60;
+  const minutes = Math.floor(toTime / 60);
+
   if (duration < 1) {
-    return `${helperDate.toLocaleTimeString([], {
-      minute: "2-digit",
-    })}min`;
+    return `${minutes}min`;
   } else {
-    return `${helperDate.toLocaleTimeString([], {
-      hour: "numeric",
-    })}h ${helperDate.toLocaleTimeString([], {
-      minute: "2-digit",
-    })}min`;
+    return `${hours}h ${minutes !== 0 ? `${minutes}min` : ""}`;
   }
 };
 
