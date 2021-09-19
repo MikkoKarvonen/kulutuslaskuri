@@ -39,6 +39,10 @@ function App() {
   const [calculete, setCalculate] = useState(false);
 
   useEffect(() => {
+    document.title = "Kulutuslaskuri";
+  }, []);
+
+  useEffect(() => {
     setCalculate(false);
   }, [selectedConsuption, distance, speedA, speedB]);
 
