@@ -69,6 +69,7 @@ const renderDistanceSelector = (
           onChange={setDistance}
           min={minimum}
           max={maxDistance}
+          data-testid="distance"
         />
         km
       </div>
@@ -97,6 +98,7 @@ const renderSpeedSelector = (
           onChange={setSpeed}
           min={minimum}
           max={maxSpeed}
+          data-testid="speed"
         />
         km/h
       </div>
