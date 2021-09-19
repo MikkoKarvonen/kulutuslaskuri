@@ -95,15 +95,15 @@ function App() {
         <Button
           type="primary"
           icon={<CalculatorOutlined />}
-          onClick={() => setCalculate(true)}
+          onClick={() => setCalculate(!calculete)}
           size={"large"}
           shape="round"
         >
-          Laske
+          {!calculete ? "Laske" : "Piilota"}
         </Button>
-        <Divider />
         {calculete && (
           <div>
+            <Divider />
             {drawCars(speedA, speedB, carEmoji)}
             <Space direction="vertical">
               {speedValues.map((speed, index) => {
