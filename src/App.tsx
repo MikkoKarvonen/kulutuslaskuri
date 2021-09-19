@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import "antd/dist/antd.css";
 import { Button, Divider, Layout, Space, Typography } from "antd";
@@ -29,11 +29,17 @@ function App() {
   const maxDistance = 5000;
   const maxSpeed = 250;
 
-  const [selectedConsuption, setSelectedConsuption] = useState(0);
+  const [selectedConsuption, setSelectedConsuption] = useState(
+    cars[0].consumption
+  );
   const [distance, setDistance] = useState(minimum);
   const [speedA, setSpeedA] = useState(minimum);
   const [speedB, setSpeedB] = useState(minimum);
   const [calculete, setCalculate] = useState(false);
+
+  useEffect(() => {
+    setCalculate(false);
+  }, [selectedConsuption, distance, speedA, speedB]);
 
   const onChange = (e: any) => {
     setSelectedConsuption(e.target.value);
