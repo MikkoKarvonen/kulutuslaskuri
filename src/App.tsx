@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
+import "antd/dist/antd.css";
+import { Button, InputNumber, Radio, Space, Typography } from "antd";
+import { CalculatorOutlined } from "@ant-design/icons";
+const { Text, Title } = Typography;
 
 function App() {
   const cars = [
@@ -78,73 +82,89 @@ function App() {
     return Math.round(difference * 10) / 10;
   };
 
+  const onChange = (e: any) => {
+    setSelectedConsuption(e.target.value);
+  };
+
   return (
     <div>
-      <h1>Kulutuslaskuri</h1>
-      <h2>Valitse autosi</h2>
-      {cars.map((car) => {
-        return (
-          <div>
-            <p>
-              {car.emoji} Auto {car.letter} (Kulutus {car.consumption}l / 100km)
-            </p>
-            <input
-              type="radio"
-              value={car.consumption}
-              onChange={() => setSelectedConsuption(car.consumption)}
-            />
-          </div>
-        );
-      })}
-      <h2>Anna ajettava matka</h2>
-      <input
-        type="number"
-        value={distance}
-        onChange={(e) => setDistance(Number(e.target.value))}
+      <Title>Kulutuslaskuri</Title>
+      <Title level={2}>Valitse autosi</Title>
+      <Radio.Group onChange={onChange} value={selectedConsuption}>
+        <Space direction="vertical">
+          {cars.map((car) => {
+            return (
+              <Radio value={car.consumption}>
+                <p>
+                  {car.emoji} Auto {car.letter} (Kulutus {car.consumption}l /
+                  100km)
+                </p>
+              </Radio>
+            );
+          })}
+        </Space>
+      </Radio.Group>
+      <Title level={2}>Anna ajettava matka</Title>
+      <InputNumber
+        defaultValue={distance}
+        onChange={setDistance}
         min={minimum}
         max={maxDistance}
       />
-      <p>Anna ensimmäinen ajettava nopeus</p>
-      <input
-        type="number"
-        value={speedA}
-        onChange={(e) => setSpeedA(Number(e.target.value))}
+      km
+      <Title level={2}>Anna ensimmäinen ajettava nopeus</Title>
+      <InputNumber
+        defaultValue={speedA}
+        onChange={setSpeedA}
         min={minimum}
         max={maxSpeed}
       />
-      <p>Anna toinen ajettava nopeus</p>
-      <input
-        type="number"
-        value={speedB}
-        onChange={(e) => setSpeedB(Number(e.target.value))}
+      km/h
+      <Title level={2}>Anna toinen ajettava nopeus</Title>
+      <InputNumber
+        defaultValue={speedB}
+        onChange={setSpeedB}
         min={minimum}
         max={maxSpeed}
       />
+      km/h
       <br />
-      <button onClick={() => setCalculate(true)}>calculate</button>
+      <Button
+        type="primary"
+        icon={<CalculatorOutlined />}
+        onClick={() => setCalculate(true)}
+        size={"large"}
+        shape="round"
+      >
+        Laske
+      </Button>
       {calculete ? (
         <div>
-          <p>
-            Matka ensimmäisellä nopeudella kestää {calculateDuration(speedA)} ja
-            kulutus on {calculateConsuption(speedA)}l.
-          </p>
-          <p>
-            Matka toisella nopeudella kestää {calculateDuration(speedB)} ja
-            kulutus on {calculateConsuption(speedB)}l.
-          </p>
-          <div>
-            <p>
+          <Space direction="vertical">
+            <Text>
+              Matka ensimmäisellä nopeudella kestää{" "}
+              <Text strong>{calculateDuration(speedA)}</Text>
+              ja kulutus on <Text strong>{calculateConsuption(speedA)}l</Text>.
+            </Text>
+            <Text>
+              Matka toisella nopeudella kestää{" "}
+              <Text strong>{calculateDuration(speedB)}</Text> ja kulutus on{" "}
+              <Text strong>{calculateConsuption(speedB)}l</Text>.
+            </Text>
+            <Text>
               Ensimmäinen nopeus on{" "}
-              {calculateDurationDifference(speedA, speedB)}{" "}
+              <Text strong>{calculateDurationDifference(speedA, speedB)} </Text>
               {speedA < speedB ? "hitaampi" : "nopeampi"} kuin toinen nopeus.
-            </p>
-            <p>
+            </Text>
+            <Text>
               Ensimmäinen nopeus kuluttaa{" "}
-              {calculateConsuptionDifference(speedA, speedB)}l{" "}
+              <Text strong>
+                {calculateConsuptionDifference(speedA, speedB)}l{" "}
+              </Text>
               {speedA < speedB ? "vähemmän" : "enemmän"} bensaa kuin toinen
               nopeus.
-            </p>
-          </div>
+            </Text>
+          </Space>
         </div>
       ) : null}
     </div>
