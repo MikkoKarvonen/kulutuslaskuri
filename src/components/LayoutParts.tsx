@@ -1,9 +1,11 @@
-import { InputNumber, Radio, Space, Typography } from "antd";
+import { Button, InputNumber, Popover, Radio, Space, Typography } from "antd";
 import React from "react";
 import Calculators from "./Calculators";
+import { QuestionOutlined } from "@ant-design/icons";
 const { Text, Title } = Typography;
 
 const slope = 1.009;
+const tipText = "Minimi ja maksimi";
 
 type OnChangeFunction = (e: any) => void;
 type CarsType = {
@@ -23,9 +25,9 @@ const renderCarSelector = (
       <Title level={2}>Valitse autosi</Title>
       <Radio.Group onChange={onChange} value={selectedConsuption}>
         <Space direction="vertical">
-          {cars.map((car) => {
+          {cars.map((car, index) => {
             return (
-              <Radio value={car.consumption}>
+              <Radio value={car.consumption} key={`radio_${index}`}>
                 <p>
                   {car.emoji} Auto {car.letter} (Kulutus {car.consumption}l /
                   100km)
@@ -39,6 +41,14 @@ const renderCarSelector = (
   );
 };
 
+const renderPopover = (minimum: number, maximum: number) => {
+  return (
+    <Popover content={`${minimum} - ${maximum}`} title={tipText}>
+      <Button shape="circle" icon={<QuestionOutlined />} />
+    </Popover>
+  );
+};
+
 const renderDistanceSelector = (
   distance: number,
   setDistance: SetterType,
@@ -48,9 +58,9 @@ const renderDistanceSelector = (
   return (
     <React.Fragment>
       <div>
-        <Space>
+        <Space align="baseline">
           <Title level={2}>Anna ajettava matka</Title>
-          <Text type="secondary">1 - 5000</Text>
+          {renderPopover(minimum, maxDistance)}
         </Space>
       </div>
       <div>
@@ -76,9 +86,9 @@ const renderSpeedSelector = (
   return (
     <React.Fragment>
       <div>
-        <Space>
+        <Space align="baseline">
           <Title level={2}>Anna {route} ajettava nopeus</Title>
-          <Text type="secondary">1 - 250</Text>
+          {renderPopover(minimum, maxSpeed)}
         </Space>
       </div>
       <div>

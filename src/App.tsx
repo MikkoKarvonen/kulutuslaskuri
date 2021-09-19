@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "antd/dist/antd.css";
 import { Button, Divider, Layout, Space, Typography } from "antd";
 import { CalculatorOutlined } from "@ant-design/icons";
 import LayoutParts from "./components/LayoutParts";
 const { Content } = Layout;
-const { Title } = Typography;
+const { Text, Title } = Typography;
 
 function App() {
   const cars = [
@@ -72,13 +72,17 @@ function App() {
           minimum,
           maxDistance
         )}
-        {speedValues.map((speed) => {
-          return LayoutParts.renderSpeedSelector(
-            speed.route,
-            speed.speed,
-            speed.setSpeed,
-            minimum,
-            maxSpeed
+        {speedValues.map((speed, index) => {
+          return (
+            <React.Fragment key={`speed_${index}`}>
+              {LayoutParts.renderSpeedSelector(
+                speed.route,
+                speed.speed,
+                speed.setSpeed,
+                minimum,
+                maxSpeed
+              )}
+            </React.Fragment>
           );
         })}
         <Divider />
@@ -91,26 +95,35 @@ function App() {
         >
           Laske
         </Button>
-        {calculete ? (
+        <Divider />
+        {calculete && (
           <div>
             <Space direction="vertical">
-              {speedValues.map((speed) => {
-                return LayoutParts.renderSpeedSummary(
-                  speed.summary,
-                  selectedConsuption,
-                  distance,
-                  speed.speed
+              {speedValues.map((speed, index) => {
+                return (
+                  <React.Fragment key={`summary_${index}`}>
+                    {LayoutParts.renderSpeedSummary(
+                      speed.summary,
+                      selectedConsuption,
+                      distance,
+                      speed.speed
+                    )}
+                  </React.Fragment>
                 );
               })}
-              {LayoutParts.renderDifference(
-                selectedConsuption,
-                distance,
-                speedA,
-                speedB
+              {speedA !== speedB ? (
+                LayoutParts.renderDifference(
+                  selectedConsuption,
+                  distance,
+                  speedA,
+                  speedB
+                )
+              ) : (
+                <Text>Nopeudet ovat samat.</Text>
               )}
             </Space>
           </div>
-        ) : null}
+        )}
       </Content>
     </Layout>
   );
