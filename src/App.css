@@ -21,3 +21,32 @@ body,
   height: 100%;
   background-color: #f0f2f5;
 }
+
+.carContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.car1,
+.car2 {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.carEmojiContainer {
+  width: 100%;
+  transition-property: width;
+  transition-timing-function: linear;
+  text-align: right;
+  transition-duration: 5s;
+}
+
+.carEmoji {
+  transform: scale(-1, 1);
+}
+
+.complete {
+  width: 0%;
+}

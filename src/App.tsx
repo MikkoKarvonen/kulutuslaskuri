@@ -4,6 +4,7 @@ import "antd/dist/antd.css";
 import { Button, Divider, Layout, Space, Typography } from "antd";
 import { CalculatorOutlined } from "@ant-design/icons";
 import LayoutParts from "./components/LayoutParts";
+import drawCars from "./components/Cars";
 const { Content } = Layout;
 const { Text, Title } = Typography;
 
@@ -98,6 +99,7 @@ function App() {
         <Divider />
         {calculete && (
           <div>
+            {drawCars(speedA, speedB)}
             <Space direction="vertical">
               {speedValues.map((speed, index) => {
                 return (
