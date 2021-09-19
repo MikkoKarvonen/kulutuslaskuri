@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import "antd/dist/antd.css";
 import { Button, Divider, Layout, Space, Typography } from "antd";
-import { CalculatorOutlined } from "@ant-design/icons";
+import { CalculatorOutlined, GithubOutlined } from "@ant-design/icons";
 import LayoutParts from "./components/LayoutParts";
 import drawCars from "./components/Cars";
 const { Content } = Layout;
@@ -136,6 +136,13 @@ function App() {
           </div>
         )}
       </Content>
+      <a
+        href="https://github.com/MikkoKarvonen/kulutuslaskuri"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <Button icon={<GithubOutlined />} />
+      </a>
     </Layout>
   );
 }
