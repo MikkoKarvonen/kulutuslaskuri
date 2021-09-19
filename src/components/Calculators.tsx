@@ -22,7 +22,7 @@ const calculateConsuption = (
   speed: number
 ) => {
   const consuption =
-    (selectedConsuption * Math.pow(slope, distance) * speed) / 100;
+    (selectedConsuption * Math.pow(slope, speed - 1) * distance) / 100;
   return Math.round(consuption * 10) / 10;
 };
 
@@ -55,8 +55,8 @@ const calculateConsuptionDifference = (
   speed2: number
 ) => {
   const difference = Math.abs(
-    (selectedConsuption * Math.pow(slope, distance) * speed1) / 100 -
-      (selectedConsuption * Math.pow(slope, distance) * speed2) / 100
+    (selectedConsuption * Math.pow(slope, speed1 - 1) * distance) / 100 -
+      (selectedConsuption * Math.pow(slope, speed2 - 1) * distance) / 100
   );
   return Math.round(difference * 10) / 10;
 };
